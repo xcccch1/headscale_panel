@@ -1,28 +1,50 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  <div class="header">
-    <div class="container">
-      <h1>Headscale 管理面板</h1>
-      <nav>
-        <router-link to="/users">用户管理</router-link>
-        <router-link to="/nodes">节点管理</router-link>
-        <router-link to="/keys">PreAuth密钥</router-link>
-      </nav>
-    </div>
-  </div>
-    
-    <div class="container">
-      <router-view />
-    </div>
+  <t-layout>
+    <t-header>
+      <t-head-menu theme="light" height="120px" :value="activeMenu">
+        <template #logo>
+          <img width="136" class="logo" src="https://www.tencent.com/img/index/menu_logo_hover.png" alt="logo" />
+        </template>
+        <t-menu-item v-for="item in menuItems" :key="item.value" :value="item.value" @click="activeMenu = item.value">
+          <Router-link :to="item.path">{{ item.label }}</Router-link>
+        </t-menu-item>
+      </t-head-menu>
+    </t-header>
+    <t-content>
+      <div>
+        <router-view />
+      </div>
+    </t-content>
+  </t-layout>
 </template>
+
+<script setup>
+import { ref, watch } from 'vue'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+
+const route = useRoute()
+const activeMenu = ref('')
+const menuItems = ref([
+  { label: '用户管理', value: '/users', path: '/users' },
+  { label: '节点管理', value: '/nodes', path: '/nodes' },
+  { label: 'PreAuth密钥', value: '/keys', path: '/keys' }
+])
+
+watch(() => route.path, (path) => {
+  const item = menuItems.value.find(item => item.path === path)
+  if (item) {
+    activeMenu.value = item.value
+  }
+},
+  { immediate: true }
+)
+
+</script>
 
 <style scoped>
 .header {
   background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 

@@ -13,17 +13,20 @@ const router = createRouter({
     {
       path: '/users',
       name: 'Users',
-      component: Users
+      component: Users,
+      meta: { menuValue: 'users' }
     },
     {
       path: '/nodes',
       name: 'Nodes',
-      component: Nodes
+      component: Nodes,
+      meta: { menuValue: 'nodes' }
     },
     {
       path: '/keys',
       name: 'PreAuthKeys',
-      component: PreAuthKeys
+      component: PreAuthKeys,
+      meta: { menuValue: 'keys' }
     }
   ],
 })
