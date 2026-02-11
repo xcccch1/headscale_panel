@@ -6,4 +6,4 @@ change c
 
 change d
 
-commit e
+change e
