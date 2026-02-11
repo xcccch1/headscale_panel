@@ -1,6 +1,6 @@
 change a
 
-commit b
+change b
 
 change c
 
