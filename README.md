@@ -2,7 +2,7 @@ commit a
 
 commit b
 
-commit c
+change c
 
 commit d
 
