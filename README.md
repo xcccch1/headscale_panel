@@ -4,6 +4,6 @@ commit b
 
 change c
 
-commit d
+change d
 
 commit e
